@@ -1,0 +1,8 @@
+order.java -->  getSubTotal()
+
+burger 5
+pizza 20
+
+quantity    name         item price       itemtotal(Output of getItemTotal)       OrderItem_Object
+2           burger        5               10                                          obj1
+4           pizza         20              80                                          obj2
