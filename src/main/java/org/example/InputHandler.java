@@ -10,10 +10,10 @@ public class InputHandler {
         return quantity;
     }
 
-    public int readId(){
+    public String readName(){
         Scanner scn = new Scanner(System.in);
-        System.out.println("Enter the Item ID: ");
-        int item = scn.nextInt();
+        System.out.println("Enter the Item Name: ");
+        String item = scn.nextLine();
         return item;
     }
 }

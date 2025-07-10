@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Restraunt {
     private Map<Integer, MenuItem> menu = new HashMap<>();
@@ -32,17 +33,13 @@ public class Restraunt {
         return menu.get(id);
     }
 
-    public void takeOrder(Order order, int id, int quantity){
+    public void takeOrder(Order order, int key, int quantity){
         Order localOrder = order;
-        for (int i : menu.keySet()){
-            int menuId = menu.get(i).getID();
-            if(menuId==id){
-                localOrder.addItem(menu.get(i), quantity);
-                return;
-            }
+        if (menu.containsKey(key)){
+            order.addItem(menu.get(key), quantity);
         }
-
-        System.out.println("INVALID ITEM ID\nPLEASE ENTER VALID ID");
+        else
+            System.out.println("INVALID ITEM NAME\nPLEASE ENTER VALID ITEM");
     }
     //my own progress...
     public void generateAndPrintBill(Order order){
@@ -55,12 +52,22 @@ public class Restraunt {
         while (true) {
             displayMenu();
             InputHandler user = new InputHandler();
-            int id = user.readId();
-            if(id == 0){
+            int key=0;
+            String itemName = user.readName();
+            for (int i : menu.keySet()) {
+//                if(Objects.equals(menu.get(i).getName(), itemName)){
+//                    key = i;
+//                }
+                if(menu.get(i).getName().equals(itemName)){
+                    key = i;
+                }
+            }
+
+            if(key == 0){
                 //System.out.println("BREAKING");
                 break;
             }
-            takeOrder(order, id, user.readQuantity());
+            takeOrder(order, key, user.readQuantity());
         }
     }
 
